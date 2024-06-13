@@ -1,9 +1,10 @@
 import express from "express";
-import addAPPDataRoute from './addAppData'
-import updateAppDataRoutes from "./updateAPPData";
+import AppDataRoute from "./AppDataRoutes";
+import UserRoute from "./UserRoutes";
+
 const versionRoutes = express.Router()
 
-versionRoutes.use("/addAppData", addAPPDataRoute)
-versionRoutes.use("/updateAppData",updateAppDataRoutes)
+versionRoutes.use("/appData", AppDataRoute)
+versionRoutes.use("/user", UserRoute)
 
 export default versionRoutes
