@@ -15,3 +15,6 @@
 - Tasks data can be updated by click on particular task edit button
 - After modifying task user had to click update and task will be modified 
 - Tasks can be deleted by hitting delete button.
+
+### UI of dashboard
+![image](https://github.com/Prashantkry/pedalstart/assets/71703153/7653f7ac-adbe-4889-a6e8-00b824b80e39)
