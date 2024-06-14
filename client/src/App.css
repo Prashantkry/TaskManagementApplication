@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.svgBlend path {
+  stroke: #3516a5;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+  /* mix-blend-mode: overlay; */
+  animation: draw 4s forwards infinite;
+}
+
+@keyframes draw {
+  from {
+    stroke-dasharray: 0, 1000;
+  }
+  to {
+    stroke-dasharray: 1000, 0;
+  }
+}
