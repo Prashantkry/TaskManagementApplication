@@ -29,7 +29,8 @@ const Dashboard = () => {
     // adding task to database
     const addTask = async () => {
         // console.log("title", title, "dueDate", dueDate, "description", descriptions, "email", email)
-        const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
+        // const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
+            const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
