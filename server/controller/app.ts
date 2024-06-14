@@ -34,7 +34,13 @@ export const createApp = async (req: express.Request, res: express.Response): Pr
 
 // ! Get all Task from database
 export const getAllAppData = async (req: express.Request, res: express.Response): Promise<Response> => {
-    const allData = await applicationModel.find()
+    const { email } = req.headers
+    // console.log("email -> ", email)
+    const allData = await applicationModel.find({ email: email })
+    if (!allData) {
+        return res.status(400).json({ message: "No data found" }).end()
+    }
+    // console.log("allData -> ", allData)
     return res.status(200).json({ allData }).end()
 }
 

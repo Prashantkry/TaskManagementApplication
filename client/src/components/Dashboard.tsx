@@ -87,6 +87,7 @@ const Dashboard = () => {
         }
     }
     // end
+
     // delete task 
     const handleDelete = async (title: string) => {
         console.log("delete api trig")
@@ -112,14 +113,14 @@ const Dashboard = () => {
     }
     // end
 
-
     // getting all task from database
-    const getTask = async () => {
+    const getTask = async (email: string) => {
         // const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
-        const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
+            const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
             method: "GET",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                email: email
             }
         })
         const data = await dataSent.json();
@@ -127,8 +128,11 @@ const Dashboard = () => {
         setAllTask(data.allData)
     }
     useEffect(() => {
-        getTask()
-    }, [])
+        // console.log("email -> ", email)
+        if (email) {
+            getTask(email)
+        }
+    }, [email])
     // end
 
     return (
