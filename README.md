@@ -4,6 +4,7 @@
 - Redux is used to manage data flow in front-end 
 - Follow MVC Pattern of Node Js.
 - REST API is used.
+- Fully Responsive to all types of devices
 
 ## Work Flow
 - Create an account by providing email name and password 
