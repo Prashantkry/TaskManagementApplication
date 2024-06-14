@@ -1,5 +1,5 @@
 import { RootState } from "../redux/Store";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -27,10 +27,10 @@ const Dashboard = () => {
     const email = useSelector((state: RootState) => state.UserDetails.email);
 
     // adding task to database
-    const addTask = async () => {
+    const addTask = useCallback(async () => {
         // console.log("title", title, "dueDate", dueDate, "description", descriptions, "email", email)
         // const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
-            const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
+        const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ const Dashboard = () => {
         } else {
             toast.error("Something went wrong")
         }
-    }
+    })
 
     // edit task data
     const handleEditData = (task: Task) => {
@@ -66,7 +66,7 @@ const Dashboard = () => {
     // end
 
     // update task 
-    const updateTask = async () => {
+    const updateTask = useCallback(async () => {
         // const updateData = await fetch('http://localhost:5000/api/v1/appData', {
         const updateData = await fetch('https://pedalstart.onrender.com/api/v1/appData', {
             method: "PUT",
@@ -86,11 +86,11 @@ const Dashboard = () => {
         if (updatedData.status === "App data updated successfully") {
             toast.dark("Task updated successfully")
         }
-    }
+    })
     // end
 
     // delete task 
-    const handleDelete = async (title: string) => {
+    const handleDelete = useCallback(async (title: string) => {
         console.log("delete api trig")
         try {
             // const deleteData = await fetch('http://localhost:5000/api/v1/appData', {
@@ -111,13 +111,13 @@ const Dashboard = () => {
         } catch (err) {
             console.log(err)
         }
-    }
+    })
     // end
 
     // getting all task from database
     const getTask = async (email: string) => {
         // const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
-            const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
+        const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ const Dashboard = () => {
         if (email) {
             getTask(email)
         }
-    }, [email])
+    }, [email, addTask, updateTask, handleDelete])
     // end
 
     return (
@@ -148,26 +148,23 @@ const Dashboard = () => {
                 <div className="flex flex-wrap lg:flex-nowrap items-start py-10 md:p-0 justify-between h-full overflow-scroll no-scrollbar">
                     {/* for input of data */}
                     <div className="md:w-[45%] w-full md:h-[70%]">
-                        <form>
-                            <fieldset className="border-2 border-indigo-950 rounded-lg px-5 py-3">
-                                <legend className="bg-transparent text-indigo-600 px-1">Start Managing Your Task</legend>
-                                <div className="mb-2">
-                                    <label className="text-indigo-700" htmlFor="title">Title</label>
-                                    <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" id="title" placeholder="Enter unique title" className="w-full mt-2 outline-none bg-transparent placeholder:text-gray-700 text-gray-400 placeholder:text-sm border-2 border-indigo-900 rounded text-lg py-1 px-2" />
-                                </div>
-                                <div className="mb-2">
-                                    <label className="text-indigo-700" htmlFor="dueDate">Due Date</label>
-                                    <input onChange={(e) => setDueDate(e.target.value)} value={dueDate} type="date" id="dueDate" placeholder="Enter title" className="calender w-full mt-2 outline-none bg-transparent placeholder:text-sm placeholder:text-gray-700  text-gray-400 border-2 border-indigo-900 rounded text-sm py-1 px-2" />
-                                </div>
-                                <div className="mb-2">
-                                    <label className="text-indigo-700" htmlFor="description">Description</label>
-                                    <textarea onChange={(e) => setDescriptions(e.target.value)} value={descriptions} id="description" className="w-full h-[15vh] mt-2 outline-none bg-transparent placeholder:text-sm  text-gray-400 border-2 border-indigo-900 rounded text-sm py-1 px-2" />
-                                </div>
-                                <button onClick={addTask} type="submit" className="border-2 border-indigo-900 text-indigo-600 rounded text-lg py-1 px-2 mx-1 my-2">Add Task</button>
-                                <button onClick={updateTask} type="submit" className="border-2 border-indigo-900 text-indigo-600 rounded text-lg py-1 px-2 mx-1 my-2">Update</button>
-                            </fieldset>
-
-                        </form>
+                        <fieldset className="border-2 border-indigo-950 rounded-lg px-5 py-3">
+                            <legend className="bg-transparent text-indigo-600 px-1">Start Managing Your Task</legend>
+                            <div className="mb-2">
+                                <label className="text-indigo-700" htmlFor="title">Title</label>
+                                <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" id="title" placeholder="Enter unique title" className="w-full mt-2 outline-none bg-transparent placeholder:text-gray-700 text-gray-400 placeholder:text-sm border-2 border-indigo-900 rounded text-lg py-1 px-2" />
+                            </div>
+                            <div className="mb-2">
+                                <label className="text-indigo-700" htmlFor="dueDate">Due Date</label>
+                                <input onChange={(e) => setDueDate(e.target.value)} value={dueDate} type="date" id="dueDate" placeholder="Enter title" className="calender w-full mt-2 outline-none bg-transparent placeholder:text-sm placeholder:text-gray-700  text-gray-400 border-2 border-indigo-900 rounded text-sm py-1 px-2" />
+                            </div>
+                            <div className="mb-2">
+                                <label className="text-indigo-700" htmlFor="description">Description</label>
+                                <textarea onChange={(e) => setDescriptions(e.target.value)} value={descriptions} id="description" className="w-full h-[15vh] mt-2 outline-none bg-transparent placeholder:text-sm  text-gray-400 border-2 border-indigo-900 rounded text-sm py-1 px-2" />
+                            </div>
+                            <button onClick={addTask} type="submit" className="border-2 border-indigo-900 text-indigo-600 rounded text-lg py-1 px-2 mx-1 my-2">Add Task</button>
+                            <button onClick={updateTask} type="submit" className="border-2 border-indigo-900 text-indigo-600 rounded text-lg py-1 px-2 mx-1 my-2">Update</button>
+                        </fieldset>
                     </div>
                     {/* end */}
 

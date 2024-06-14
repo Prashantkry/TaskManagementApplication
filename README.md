@@ -1,8 +1,10 @@
 # Task Management Application
 - User can manage task by creating updating and deleting.
 - It is a web application created in React Js Node Js Mongo Db Express Typescript Javascript Tailwind CSS HTML 
-- Follow MVC Pattern of Node Js.
 - Redux is used to manage data flow in front-end 
+- Follow MVC Pattern of Node Js.
+- REST API is used.
+
 ## Work Flow
 - Create an account by providing email name and password 
 - Then do sign in by providing email and password
