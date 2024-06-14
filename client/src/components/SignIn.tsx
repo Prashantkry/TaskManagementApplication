@@ -30,7 +30,7 @@ export default function SignInPage() {
         })
         // console.log("sentSignInData -> ", sentSignInData)
         const receivedData = await sentSignInData.json()
-        console.log("receivedData -> ", receivedData)
+        // console.log("receivedData -> ", receivedData)
         if (receivedData.message === "User signed in") {
             toast.success("User signed in successfully")
             localStorage.setItem("user", JSON.stringify(receivedData.userOtherData))

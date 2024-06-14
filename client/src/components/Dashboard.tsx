@@ -2,7 +2,7 @@ import { RootState } from "../redux/Store";
 import { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -26,11 +26,11 @@ const Dashboard = () => {
 
     const email = useSelector((state: RootState) => state.UserDetails.email);
 
-    // adding task to database
+    // ! adding task to database
     const addTask = useCallback(async () => {
         // console.log("title", title, "dueDate", dueDate, "description", descriptions, "email", email)
         // const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
-        const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
+            const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -43,16 +43,19 @@ const Dashboard = () => {
             })
         })
         const data = await dataSent.json();
-        if (data.status === "success") {
+        if (data.message === "Application data added successfully") {
+            if (email) {
+                getTask(email)
+            }
             toast.success("Task added successfully")
-        } else if (data.status === "Data missing") {
+        } else if (data.message === "Data missing") {
             toast.error("Please fill all the fields")
         } else {
             toast.error("Something went wrong")
         }
-    },[descriptions, dueDate, email, title])
+    }, [descriptions, dueDate, email, title])
 
-    // edit task data
+    // ! edit task data
     const handleEditData = (task: Task) => {
         setOldTitle(task.title)
         setTitle("")
@@ -65,10 +68,10 @@ const Dashboard = () => {
     }
     // end
 
-    // update task 
+    // ! update task 
     const updateTask = useCallback(async () => {
         // const updateData = await fetch('http://localhost:5000/api/v1/appData', {
-        const updateData = await fetch('https://pedalstart.onrender.com/api/v1/appData', {
+            const updateData = await fetch('https://pedalstart.onrender.com/api/v1/appData', {
             method: "PUT",
             headers: {
                 'Content-Type': "application/json"
@@ -83,18 +86,21 @@ const Dashboard = () => {
         })
         const updatedData = await updateData.json();
         // console.log("updatedData", updatedData)
-        if (updatedData.status === "App data updated successfully") {
+        if (updatedData.message === "App data updated successfully") {
+            getTask(email)
             toast.dark("Task updated successfully")
+        } else {
+            toast.error("Task not updated")
         }
-    },[descriptions, dueDate, email, oldTitle, title])
+    }, [descriptions, dueDate, email, oldTitle, title])
     // end
 
-    // delete task 
+    // ! delete task 
     const handleDelete = useCallback(async (title: string) => {
-        console.log("delete api trig")
+        // console.log("delete api trig")
         try {
             // const deleteData = await fetch('http://localhost:5000/api/v1/appData', {
-            const deleteData = await fetch('https://pedalstart.onrender.com/api/v1/appData', {
+                const deleteData = await fetch('https://pedalstart.onrender.com/api/v1/appData', {
                 method: "delete",
                 headers: {
                     'Content-Type': "application/json"
@@ -105,19 +111,22 @@ const Dashboard = () => {
             })
             const deletedData = await deleteData.json();
             // console.log("deletedData", deletedData)
-            if (deletedData.status === "Application data successfully deleted") {
+            if (deletedData.message === "Application data successfully deleted") {
+                getTask(email)
                 toast.dark("Task deleted successfully")
+            }else {
+                toast.error("Task not deleted")
             }
         } catch (err) {
             console.log(err)
         }
-    },[])
+    }, [])
     // end
 
     // getting all task from database
     const getTask = async (email: string) => {
         // const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
-        const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
+            const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
@@ -138,6 +147,7 @@ const Dashboard = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className="w-full h-[91vh] bg-gray-950 px-10 py-5">
                 {/* welcome txt */}
                 <div>

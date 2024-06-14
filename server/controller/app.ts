@@ -68,7 +68,7 @@ export const readAndUpdateAppData = async (req: express.Request, res: express.Re
             }
         }
         // console.log("updateQuery -> ", updateQuery)
-        await applicationModel.updateOne({ email: email }, updateQuery)
+        await applicationModel.updateOne({ title: oldTitle }, updateQuery)
         // console.log("updateData -> ", updateData)
         return res.status(200).json({ message: "App data updated successfully" }).end()
     } catch (err) {
@@ -96,7 +96,7 @@ export const deleteAppData = async (req: express.Request, res: express.Response)
         // console.log(data)
         if (data.title === title) {
             deleteTitle = data.title
-            console.log("deleteTitle -> ", deleteTitle)
+            // console.log("deleteTitle -> ", deleteTitle)
         }
     })
     try {
