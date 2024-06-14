@@ -11,7 +11,8 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
 
   const sendSignUpData = async () => {
-    const singUpData = await fetch("http://localhost:5000/api/v1/user", {
+    // const singUpData = await fetch("http://localhost:5000/api/v1/user", {
+    const singUpData = await fetch("https://pedalstart.onrender.com/api/v1/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
