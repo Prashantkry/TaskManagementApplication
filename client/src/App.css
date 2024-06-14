@@ -20,3 +20,21 @@
     stroke-dasharray: 1000, 0;
   }
 }
+
+.calender {
+  color-scheme: dark;
+  accent-color: indigo;
+}
+
+@layer utilities {
+  @variants responsive {
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
+}

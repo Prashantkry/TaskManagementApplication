@@ -27,14 +27,14 @@ export default function SignInPage() {
                 password
             })
         })
-        console.log("sentSignInData -> ", sentSignInData)
+        // console.log("sentSignInData -> ", sentSignInData)
         const receivedData = await sentSignInData.json()
         console.log("receivedData -> ", receivedData)
         if (receivedData.message === "User signed in") {
             toast.success("User signed in successfully")
             localStorage.setItem("user", JSON.stringify(receivedData.userOtherData))
             dispatch(setSignedIn(true))
-            dispatch(setEmailData(receivedData.userOtherData.email))
+            dispatch(setEmailData(receivedData.email))
             navigate("/")
         }
     }

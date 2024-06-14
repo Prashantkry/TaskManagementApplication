@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 9000
 const clientEndURl = process.env.clientUrl
 const mongoUrl = process.env.MONGO_URL
 
-
 const app = express()
 
 
