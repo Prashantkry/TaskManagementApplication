@@ -50,7 +50,7 @@ const Dashboard = () => {
         } else {
             toast.error("Something went wrong")
         }
-    })
+    },[descriptions, dueDate, email, title])
 
     // edit task data
     const handleEditData = (task: Task) => {
@@ -86,7 +86,7 @@ const Dashboard = () => {
         if (updatedData.status === "App data updated successfully") {
             toast.dark("Task updated successfully")
         }
-    })
+    },[descriptions, dueDate, email, oldTitle, title])
     // end
 
     // delete task 
@@ -111,7 +111,7 @@ const Dashboard = () => {
         } catch (err) {
             console.log(err)
         }
-    })
+    },[])
     // end
 
     // getting all task from database
