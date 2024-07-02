@@ -4,6 +4,7 @@
 - Redux is used to manage data flow in front-end 
 - Follow MVC Pattern of Node Js.
 - REST API is used.
+- Fully Responsive to all types of devices
 
 ## Work Flow
 - Create an account by providing email name and password 
@@ -15,3 +16,6 @@
 - Tasks data can be updated by click on particular task edit button
 - After modifying task user had to click update and task will be modified 
 - Tasks can be deleted by hitting delete button.
+
+### UI of dashboard
+![image](https://github.com/Prashantkry/pedalstart/assets/71703153/7653f7ac-adbe-4889-a6e8-00b824b80e39)
