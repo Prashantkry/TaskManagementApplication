@@ -38,5 +38,5 @@ server.listen(PORT, () => {
 })
 
 app.get('/', (req: express.Request, res: express.Response) => {
-    res.send(`<h1>Backend Server is active </h1>`)
+    res.send(`<h1>🎉 Backend Server is active 🎊🥂</h1>`)
 })
