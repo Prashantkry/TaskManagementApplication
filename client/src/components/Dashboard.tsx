@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
+const APIURL = 'https://taskmanagementapplication-7yrw.onrender.com/api/v1/'
+
 const Dashboard = () => {
     const navigate = useNavigate();
     const isSignedIn = useSelector((state: RootState) => state.UserDetails.SignedIn);
@@ -30,7 +32,7 @@ const Dashboard = () => {
     const addTask = useCallback(async () => {
         // console.log("title", title, "dueDate", dueDate, "description", descriptions, "email", email)
         // const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
-            const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
+        const dataSent = await fetch(`${APIURL}appData`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -71,7 +73,7 @@ const Dashboard = () => {
     // ! update task 
     const updateTask = useCallback(async () => {
         // const updateData = await fetch('http://localhost:5000/api/v1/appData', {
-            const updateData = await fetch('https://pedalstart.onrender.com/api/v1/appData', {
+        const updateData = await fetch(`${APIURL}appData`, {
             method: "PUT",
             headers: {
                 'Content-Type': "application/json"
@@ -100,7 +102,7 @@ const Dashboard = () => {
         // console.log("delete api trig")
         try {
             // const deleteData = await fetch('http://localhost:5000/api/v1/appData', {
-                const deleteData = await fetch('https://pedalstart.onrender.com/api/v1/appData', {
+            const deleteData = await fetch(`${APIURL}appData`, {
                 method: "delete",
                 headers: {
                     'Content-Type': "application/json"
@@ -114,7 +116,7 @@ const Dashboard = () => {
             if (deletedData.message === "Application data successfully deleted") {
                 getTask(email)
                 toast.dark("Task deleted successfully")
-            }else {
+            } else {
                 toast.error("Task not deleted")
             }
         } catch (err) {
@@ -126,7 +128,7 @@ const Dashboard = () => {
     // getting all task from database
     const getTask = async (email: string) => {
         // const dataSent = await fetch("http://localhost:5000/api/v1/appData", {
-            const dataSent = await fetch("https://pedalstart.onrender.com/api/v1/appData", {
+        const dataSent = await fetch(`${APIURL}appData`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
