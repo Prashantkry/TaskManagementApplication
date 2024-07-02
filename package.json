@@ -1,7 +1,7 @@
 {
-  "name": "pedalstart",
+  "name": "task-management-application",
   "version": "1.0.0",
-  "description": "pedalstart assignment",
+  "description": "task-management-application in MERN Stack using Redux Toolkit, Typescript, Javascript, TailwindCSS, HTML, CSS and Vite",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
