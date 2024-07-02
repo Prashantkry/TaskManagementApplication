@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://pedalstart.onrender.com",
+  "proxy": "https://taskmanagementapplication-7yrw.onrender.com",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
